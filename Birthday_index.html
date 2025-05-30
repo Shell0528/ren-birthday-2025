@@ -1,0 +1,74 @@
+export default function BirthdayHomepage() {
+  return (
+    <main className="bg-[#0E1018] text-white min-h-screen font-sans">
+      {/* Header 導覽列 */}
+      <header className="w-full bg-black px-6 py-4 flex items-center justify-between sticky top-0 z-50">
+        <div className="flex items-center gap-6">
+          <div className="h-10 w-10 rounded bg-gray-500" />
+          <div className="text-left">
+            <p className="text-sm text-gray-300 leading-tight">REN0809K 2025 生日</p>
+            <h1 className="text-xl font-semibold leading-tight">RENKO 火箭任務</h1>
+          </div>
+          <nav className="hidden md:flex gap-10 text-white text-base pl-12">
+            <a href="#" className="hover:text-[#00B3FF]">關於火箭</a>
+            <a href="#" className="hover:text-[#00B3FF]">生日祝福</a>
+          </nav>
+        </div>
+        <a href="#" className="border border-white px-4 py-2 rounded-full text-sm hover:bg-white hover:text-black transition">
+          前往 RCOSEA 官網
+        </a>
+      </header>
+
+      {/* Hero 區域 */}
+      <section className="relative h-screen w-full flex items-center justify-center bg-cover bg-center" style={{ backgroundImage: 'url(/images/rocket-placeholder.jpg)' }}>
+        <div className="absolute inset-0 bg-black bg-opacity-60 z-10" />
+        <div className="z-20 text-center px-4">
+          <h1 className="text-5xl md:text-6xl font-bold mb-4">2025 REN 慶生火箭特別企劃</h1>
+          <p className="text-xl md:text-2xl mb-6">Happy Birthday to Ren0809k</p>
+          <div className="flex justify-center gap-4">
+            <button className="bg-white text-black px-6 py-3 rounded-2xl text-lg hover:bg-gray-200 transition">觀看主影片</button>
+            <button className="border border-white px-6 py-3 rounded-2xl text-lg hover:bg-white hover:text-black transition">參加祝福</button>
+          </div>
+        </div>
+      </section>
+
+      {/* 火箭影片預留區塊 */}
+      <section className="py-20 px-6 text-center">
+        <h2 className="text-4xl font-semibold mb-4 text-[#79C2FF]">火箭升空影片 Coming Soon</h2>
+        <p className="text-lg text-gray-400">影片素材由試射團隊提供中，預計於生日當天嵌入。</p>
+        <div className="mt-8 border border-[#00B3FF]/30 rounded-xl h-64 flex items-center justify-center">
+          <span className="text-gray-600">[ 預留影片區塊 ]</span>
+        </div>
+      </section>
+
+      {/* 祝福牆預覽連結區塊 */}
+      <section className="py-20 px-6 text-center bg-gradient-to-b from-[#0E1018] via-[#151926] to-[#0E1018]">
+        <h2 className="text-4xl font-semibold mb-4 text-[#00B3FF]">#20250809K 祝福牆</h2>
+        <p className="text-lg text-gray-300 mb-8 max-w-2xl mx-auto">
+          一部分來自 RCOSEA 成員與粉絲們的真誠祝福，完整留言牆請點下方連結進入！
+        </p>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 max-w-6xl mx-auto mb-8">
+          {[1, 2, 3, 4, 5, 6].map((i) => (
+            <div key={i} className="bg-[#162030]/90 backdrop-blur-md border border-[#00B3FF]/40 rounded-xl p-6 text-left shadow hover:shadow-[#7BDFFF]/30 transition">
+              <p className="text-base italic text-[#A6DFFF]">“R主播生日快樂！Lorem ipsum dolor sit amet, consectetur adipiscing elit.”</p>
+              <p className="text-sm text-right text-gray-400 mt-4">- 星辰探索者 {i}</p>
+            </div>
+          ))}
+        </div>
+        <a href="/blessings" className="mt-4 inline-block px-6 py-3 border border-white rounded-2xl text-lg hover:bg-white hover:text-black transition">
+          更多祝福
+        </a>
+      </section>
+
+      {/* 底部資訊區塊 */}
+      <footer className="bg-[#2B2B2E] py-12 px-6 text-center">
+        <div className="mb-4">
+          <a href="#" className="text-white hover:underline mx-2">關於火箭</a>
+          <a href="#" className="text-white hover:underline mx-2">生日祝福</a>
+          <a href="#" className="text-white hover:underline mx-2">RCOSEA 官網</a>
+        </div>
+        <p className="text-sm text-gray-500">Copyright © 2025 Ren 火箭計畫｜by 資訊組</p>
+      </footer>
+    </main>
+  );
+}
