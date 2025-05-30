@@ -13,3 +13,9 @@
 🖼 /images/rocket-placeholder.jpg：Hero 區背景佔位圖（待升空影片上線時替換）
 
 ✅ 使用 Tailwind CSS（需掛載 CDN 或改用內建處理流程）
+
+React 專案
+本檔案是 React 組件（不是純 HTML），需在 React 專案中使用，例如用 Vite 或 Next.js 建立的專案。
+
+Tailwind CSS
+頁面所有樣式都依賴 Tailwind CSS，請確保你有安裝並正確設定
