@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>配色風格範例（互動按鈕）</title>
+  <style>
+    /* ===== 整體排版 ===== */
+    .container {
+      display: flex;
+      width: 100%;
+      height: 100vh;
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "微軟正黑體", "思源黑體", sans-serif;
+    }
+    .palette {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      padding: 16px;
+      box-sizing: border-box;
+      color: #ffffff; /* 預設文字色為白 */
+    }
+    .palette h2 {
+      text-align: center;
+      margin-bottom: 16px;
+      font-size: 1.5rem;
+      border-bottom: 2px solid rgba(255, 255, 255, 0.5);
+      padding-bottom: 8px;
+    }
+    .swatch {
+      display: flex;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+    .color-box {
+      width: 40px;
+      height: 40px;
+      margin-right: 12px;
+      border-radius: 4px;
+      /* 移除邊框 */
+    }
+    .label {
+      display: flex;
+      flex-direction: column;
+    }
+    .label .name {
+      font-size: 0.9rem;
+      font-weight: bold;
+    }
+    .label .hex {
+      font-size: 0.8rem;
+      color: #cccccc;
+    }
+    .content {
+      margin: 12px 0;
+      line-height: 1.6;
+      font-size: 0.9rem;
+    }
+    .content h3 {
+      margin-bottom: 8px;
+      font-size: 1.2rem;
+      color: inherit; /* 繼承父層設定 */
+    }
+    .content p {
+      margin: 0;
+    }
+    .footer-band {
+      margin-top: auto;
+      height: 40px;
+      border-top: 1px solid rgba(255, 255, 255, 0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      opacity: 0.75;
+    }
+
+    /* ===== 風格 1：純黑系 ===== */
+    .style1 {
+      background-color: #0E1018; /* 深藍黑底 */
+    }
+    .style1 .aux1 {
+      background-color: #151926; /* 輔助區塊 1 */
+    }
+    .style1 .aux2 {
+      background-color: #162030; /* 輔助區塊 2 */
+    }
+    .style1 .primary {
+      background-color: #00B3FF; /* 主題藍 */
+    }
+    .style1 .secondary1 {
+      background-color: #7BDFFF; /* 次要藍 1 */
+    }
+    .style1 .secondary2 {
+      background-color: #A6DFFF; /* 次要藍 2 */
+    }
+    .style1 .footer {
+      background-color: #2B2B2E; /* Footer 底色 */
+    }
+    .style1 .disabled1 {
+      background-color: #808080; /* 禁用/說明色 1 */
+    }
+    .style1 .disabled2 {
+      background-color: #999999; /* 禁用/說明色 2 */
+    }
+    .style1 .btn-light {
+      background-color: #FFFFFF;
+      color: #000000;
+      padding: 8px 16px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: color 0.2s, background-color 0.2s;
+    }
+    .style1 .btn-light:hover {
+      color: #00B3FF;
+      background-color: #f0f0f0;
+    }
+    .style1 .btn-dark {
+      background-color: #000000;
+      color: #FFFFFF;
+      padding: 8px 16px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: color 0.2s, background-color 0.2s;
+    }
+    .style1 .btn-dark:hover {
+      color: #00B3FF;
+      background-color: #1a1a1a;
+    }
+
+    /* ===== 風格 2：偏溫和暗色系 ===== */
+    .style2 {
+      background-color: #2A2A2C; /* 背景主色 */
+      color: #FAF3E0; /* 預設文字色 */
+    }
+    .style2 h2 {
+      color: #FAF3E0; /* 最上方標題 */
+    }
+    .style2 .content h3 {
+      color: #FAF3E0; /* 範例文字標題 */
+    }
+    .style2 .content p {
+      color: #FAF3E0; /* 段落文字 #D1D4E1 */
+    }
+    .style2 .btn-red {
+      background-color: #D35266; /* 按鈕紅色 */
+      color: #FAF3E0;
+      padding: 8px 16px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: filter 0.2s;
+    }
+    .style2 .btn-red:hover {
+      filter: brightness(0.9);
+    }
+    .style2 .btn-gray {
+      background-color: #567192; /* 按鈕灰色 */
+      color: #FAF3E0;
+      padding: 8px 16px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: filter 0.2s;
+    }
+    .style2 .btn-gray:hover {
+      filter: brightness(0.9);
+    }
+    .style2 .btn-blue {
+      background-color: #406BAB; /* 按鈕藍色 */
+      color: #FAF3E0;
+      padding: 8px 16px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: filter 0.2s;
+    }
+    .style2 .btn-blue:hover {
+      filter: brightness(0.9);
+    }
+    .style2 .disabled1 {
+      background-color: #808080; /* 禁用/說明色 1 */
+    }
+    .style2 .disabled2 {
+      background-color: #999999; /* 禁用/說明色 2 */
+    }
+
+    /* ===== 風格 3：偏溫和暗色＋亮紅 ===== */
+    .style3 {
+      background-color: #2A2A2C; /* 背景主色 */
+      color: #D1D4E1; /* 預設文字色為 FAF3E0 #D1D4E1 */
+    }
+    .style3 .content h3 {
+      color: #D1D4E1; /* 範例文字標題 同預設 */
+    }
+    .style3 .content p {
+      color: #D1D4E1; /* 段落文字改為白色 #FFFFFF */
+    }
+    .style3 .btn-red {
+      background-color: #C0392B; /* 按鈕亮紅色 */
+      color: #FAF3E0;
+      padding: 8px 16px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: filter 0.2s;
+    }
+    .style3 .btn-red:hover {
+      filter: brightness(1.1);
+    }
+    .style3 .btn-blue {
+      background-color: #2C3E50; /* 按鈕藍色 */
+      color: #FAF3E0;
+      padding: 8px 16px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: filter 0.2s;
+    }
+    .style3 .btn-blue:hover {
+      filter: brightness(1.1);
+    }
+  </style>
+  <svg style="display:none;">
+  <symbol id="icon-star-bullet" viewBox="0 0 28 28">
+    <path d="M12.2593 1.0768C13.0251 -0.276766 14.9749 -0.276765 15.7407 1.0768L19.5082 7.73593C19.6869 8.05181 19.9482 8.31311 20.2641 8.49182L26.9232 12.2593C28.2768 13.0251 28.2768 14.9749 26.9232 15.7407L20.2641 19.5082C19.9482 19.6869 19.6869 19.9482 19.5082 20.2641L15.7407 26.9232C14.9749 28.2768 13.0251 28.2768 12.2593 26.9232L8.49182 20.2641C8.31311 19.9482 8.05181 19.6869 7.73593 19.5082L1.0768 15.7407C-0.276766 14.9749 -0.276765 13.0251 1.0768 12.2593L7.73593 8.49182C8.05181 8.31311 8.31311 8.05181 8.49182 7.73593L12.2593 1.0768Z" fill="#FE4742"/>
+  </symbol>
+  </svg>
+</head>
+<body>
+
+  <div class="container">
+    <!-- ===== 風格1：純黑系 ===== -->
+    <div class="palette style1">
+      <h2></span>    <svg width="20" height="20">
+    <use href="#icon-star-bullet" />
+  </svg> 風格 1：純黑系</h2>
+      <!-- 測試段落：關於RCOSEA -->
+      <div class="content">
+        <h3>關於RCOSEA</h3>
+        <p><strong>RCOSEA</strong> 是由台灣實況主 <strong>Ren0809k</strong> 粉絲自發組成的創意性社群組織。源自 Ren 的社群文章區，RCOSEA 以宇宙探索、黑洞觀察、衛星開發等主題為發想，透過架空設定與角色扮演，創造出兼具娛樂性與社群參與感的虛擬機構。</p>
+      </div>
+      <!-- 背景主色 -->
+      <div class="swatch">
+        <div class="color-box" style="background-color: #0E1018;"></div>
+        <div class="label">
+          <span class="name">背景主色</span>
+          <span class="hex">#0E1018</span>
+        </div>
+      </div>
+      <!-- 輔助區塊 1 -->
+      <div class="swatch">
+        <div class="color-box aux1"></div>
+        <div class="label">
+          <span class="name">輔助區塊1</span>
+          <span class="hex">#151926</span>
+        </div>
+      </div>
+      <!-- 輔助區塊 2 -->
+      <div class="swatch">
+        <div class="color-box aux2"></div>
+        <div class="label">
+          <span class="name">輔助區塊2</span>
+          <span class="hex">#162030</span>
+        </div>
+      </div>
+      <!-- 主題藍 -->
+      <div class="swatch">
+        <div class="color-box primary"></div>
+        <div class="label">
+          <span class="name">主題藍</span>
+          <span class="hex">#00B3FF</span>
+        </div>
+      </div>
+      <!-- 次要藍 1 -->
+      <div class="swatch">
+        <div class="color-box secondary1"></div>
+        <div class="label">
+          <span class="name">次要藍1</span>
+          <span class="hex">#7BDFFF</span>
+        </div>
+      </div>
+      <!-- 次要藍 2 -->
+      <div class="swatch">
+        <div class="color-box secondary2"></div>
+        <div class="label">
+          <span class="name">次要藍2</span>
+          <span class="hex">#A6DFFF</span>
+        </div>
+      </div>
+      <!-- 按鈕示例 -->
+      <div class="swatch" style="margin-top:8px;">
+        <button class="btn-light">白底黑字按鈕</button>
+        <span style="width:12px;"></span>
+        <button class="btn-dark">黑底白字按鈕</button>
+      </div>
+      <!-- Footer 底色 -->
+      <div class="swatch" style="margin-top:12px;">
+        <div class="color-box footer"></div>
+        <div class="label">
+          <span class="name">Footer 底色</span>
+          <span class="hex">#2B2B2E</span>
+        </div>
+      </div>
+      <!-- 禁用/說明色 -->
+      <div class="swatch">
+        <div class="color-box disabled1"></div>
+        <div class="label">
+          <span class="name">禁用/說明色1</span>
+          <span class="hex">#808080</span>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="color-box disabled2"></div>
+        <div class="label">
+          <span class="name">禁用/說明色2</span>
+          <span class="hex">#999999</span>
+        </div>
+      </div>
+      <div class="footer-band">示意 Footer 區塊</div>
+    </div>
+
+    <!-- ===== 風格2：偏溫和暗色系 ===== -->
+    <div class="palette style2">
+      <h2>   <svg width="20" height="20">
+    <use href="#icon-star-bullet" />
+  </svg>風格 2：溫和暗色系</h2>
+      <!-- 測試段落：關於RCOSEA -->
+      <div class="content">
+        <h3>關於RCOSEA</h3>
+        <p><strong>RCOSEA</strong> 是由台灣實況主 <strong>Ren0809k</strong> 粉絲自發組成的創意性社群組織。源自 Ren 的社群文章區，RCOSEA 以宇宙探索、黑洞觀察、衛星開發等主題為發想，透過架空設定與角色扮演，創造出兼具娛樂性與社群參與感的虛擬機構。</p>
+      </div>
+      <!-- 背景主色 -->
+      <div class="swatch">
+        <div class="color-box" style="background-color: #2A2A2C;"></div>
+        <div class="label">
+          <span class="name">背景主色</span>
+          <span class="hex">#2A2A2C</span>
+        </div>
+      </div>
+      <!-- 按鈕：紅色 -->
+      <div class="swatch" style="margin-top:8px;">
+        <button class="btn-red">紅色按鈕</button>
+      </div>
+      <!-- 按鈕：灰色 -->
+      <div class="swatch">
+        <button class="btn-gray">灰色按鈕</button>
+      </div>
+      <!-- 按鈕：藍色 -->
+      <div class="swatch">
+        <button class="btn-blue">藍色按鈕</button>
+      </div>
+      <!-- 禁用/說明色 -->
+      <div class="swatch">
+        <div class="color-box disabled1"></div>
+        <div class="label">
+          <span class="name">禁用/說明色1</span>
+          <span class="hex">#808080</span>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="color-box disabled2"></div>
+        <div class="label">
+          <span class="name">禁用/說明色2</span>
+          <span class="hex">#999999</span>
+        </div>
+      </div>
+      <div class="footer-band" style="background-color: rgba(255,255,255,0.15); color: #FAF3E0;">
+        示意 Footer 區塊
+      </div>
+    </div>
+
+    <!-- ===== 風格3：偏溫和暗色＋亮紅 ===== -->
+	
+    <div class="palette style3">
+      <h2>   <svg width="20" height="20">
+    <use href="#icon-star-bullet" />
+  </svg>風格 3：溫和暗色＋亮紅</h2>
+      <!-- 測試段落：關於RCOSEA -->
+      <div class="content">
+        <h3>關於RCOSEA</h3>
+        <p><strong>RCOSEA</strong> 是由台灣實況主 <strong>Ren0809k</strong> 粉絲自發組成的創意性社群組織。源自 Ren 的社群文章區，RCOSEA 以宇宙探索、黑洞觀察、衛星開發等主題為發想，透過架空設定與角色扮演，創造出兼具娛樂性與社群參與感的虛擬機構。</p>
+      </div>
+
+
+      <!-- 背景主色 -->
+      <div class="swatch">
+        <div class="color-box" style="background-color: #2A2A2C;"></div>
+        <div class="label">
+          <span class="name">背景主色</span>
+          <span class="hex">#2A2A2C</span>
+        </div>
+      </div>
+      <!-- 按鈕：亮紅色 -->
+      <div class="swatch" style="margin-top:8px;">
+        <button class="btn-red">亮紅按鈕</button>
+      </div>
+      <!-- 按鈕：藍色 -->
+      <div class="swatch">
+        <button class="btn-blue">藍色按鈕</button>
+      </div>
+      <div class="footer-band" style="background-color: rgba(255,255,255,0.15); color: #FAF3E0;">
+        示意 Footer 區塊
+      </div>
+    </div>
+  </div>
+</body>
+</html>
